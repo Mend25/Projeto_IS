@@ -90,11 +90,10 @@ modo_prot:
     mov eax, cr0
     or eax, 0x1             ; ir para modo protegido (mudar bit 0 de cr0 para 1)
     mov cr0, eax
-    jmp codeseg
-    init_32bit ; 4. far jmp (limpar pipeline de possiveis instrucoes de 16 bit)
+    jmp codeseg:inicializar_32bit ; far jmp (limpar pipeline de possiveis instrucoes de 16 bit)
 
 [bits 32]
-init_32bit:
+inicializar_32bit:
     mov ax, dataseg        ; atualizar registradores de segmento
     mov ds, ax
     mov ss, ax
