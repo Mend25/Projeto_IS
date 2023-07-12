@@ -84,7 +84,7 @@ codeseg equ gdt_code - gdt_start
 dataseg equ gdt_data - gdt_start
 
 [bits 16]
-switch_to_32bit:
+modo_prot:
     cli                     ; desabilitar interrupcao
     lgdt [gdt_descriptor]   ; carregar descritor do gdt
     mov eax, cr0
