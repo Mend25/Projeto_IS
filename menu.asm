@@ -1,7 +1,7 @@
 org 0x7c00
 jmp _start
 
-message1 db "Press enter to start", 10, 13, "Instructions", 0
+message1 db "                   SOCCER PONG", 10, 13, 10, 13 "Press enter to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13 "                Instructions", 0
 
 _start:
     xor ax, ax
