@@ -10,8 +10,9 @@ _start:
     xor cx, cx
    	xor dx, dx
     mov di, 100 ;posição y inicial da primeira barra
-    mov bx, 100 ;posição y inicial da segunda barra
-	
+    mov bp, 100 ;posição y inicial da segunda barra
+    mov bx, 100
+    
 	call clear_screen
     call load_first_bar
     call load_second_bar
@@ -27,6 +28,9 @@ game_loop:
 
     jmp game_loop
 
+load_ball:
+    mov si, ball
+
 load_first_bar:
     mov si, flag
     mov dx, di
@@ -38,11 +42,11 @@ load_first_bar:
 
 load_second_bar:
     mov si, flag
-    mov dx, bx
-    add bx, 16
+    mov dx, bp
+    add bp, 16
     mov cx, 300
 	call print_second_bar
-    sub bx, 16
+    sub bp, 16
     ret
 
 print_first_bar:
@@ -78,7 +82,7 @@ print_second_bar:
         
         mov cx, 300
         inc dx
-        cmp dx, bx
+        cmp dx, bp
         jne print_second_bar
         
         ret
@@ -120,6 +124,8 @@ update_first_bar:
             call clear_screen
             call load_first_bar
             call load_second_bar
+
+        jmp update_first_bar
     
 
 update_second_bar:
@@ -137,10 +143,10 @@ update_second_bar:
     .done_s:
         ret
     .up_s:
-        cmp bx, 0
+        cmp bp, 0
         je .update_s
 
-        sub bx, 5
+        sub bp, 5
 
         .update_s:
             call clear_screen
@@ -150,15 +156,17 @@ update_second_bar:
         jmp update_second_bar
 
     .down_s:
-        cmp bx, 180
+        cmp bp, 180
         je .update_s_
         
-        add bx, 5
+        add bp, 5
         
         .update_s_:
             call clear_screen
             call load_first_bar
             call load_second_bar
+        
+        jmp update_second_bar
 
 getchar:
     mov ah, 0x00 
