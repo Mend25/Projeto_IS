@@ -39,7 +39,7 @@ load_second_bar:
     mov si, flag
     mov dx, bx
     add bx, 16
-    mov cx, 100
+    mov cx, 300
 	call print_second_bar
     sub bx, 16
     ret
@@ -72,10 +72,10 @@ print_second_bar:
 
     .travel_by_image:
         inc cx
-        cmp cx, 116
+        cmp cx, 316
         jne print_second_bar
         
-        mov cx, 100
+        mov cx, 300
         inc dx
         cmp dx, bx
         jne print_second_bar
