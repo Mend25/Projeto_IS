@@ -1,8 +1,7 @@
 org 0x7c00
 jmp _start
 
-message1 db "Press enter to start", 10, 13
-message2 db "Instructions", 0
+message1 db "Press enter to start", 10, 13, "Instructions", 0
 
 _start:
     xor ax, ax
@@ -19,10 +18,6 @@ _start:
     mov bl, 2
 
     mov si, message1
-    call print_loop
-    
-    xor si, si
-    mov si, message2
     call print_loop
 
     call done
