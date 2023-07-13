@@ -24,7 +24,6 @@ _start:
     xor si, si
     mov si, message2
     call print_loop
-    
 
     call done
     
