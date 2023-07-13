@@ -8,25 +8,43 @@ _start:
     xor ax, ax
     xor cx, cx
    	xor dx, dx
-    mov bx, 100 ;posição y inicial
+    mov di, 100 ;posição y inicial da primeira barra
+    mov bx, 100 ;posição y inicial da segunda barra
 	
 	call clear_screen
-    call load_bar
+    call load_first_bar
+    call load_second_bar
 
     ;loop
-    call read_key
+    call game_loop
 
 	jmp done
 
-load_bar:
+game_loop:
+    call update_first_bar
+    call update_second_bar
+
+    jmp game_loop
+
+load_first_bar:
+    mov si, flag
+    mov dx, di
+    add di, 16
+    xor cx, cx
+	call print_first_bar
+    sub di, 16
+    ret
+
+load_second_bar:
     mov si, flag
     mov dx, bx
     add bx, 16
-	call print_bar
+    mov cx, 100
+	call print_second_bar
     sub bx, 16
     ret
 
-print_bar:
+print_first_bar:
 	lodsb
 	mov ah, 0ch
 	int 10h
@@ -36,54 +54,110 @@ print_bar:
     .travel_by_image:
         inc cx
         cmp cx, 16
-        jne print_bar
+        jne print_first_bar
         
         xor cx, cx
         inc dx
-        cmp dx, bx
-        jne print_bar
+        cmp dx, di
+        jne print_first_bar
         
         ret
 
-read_key:
+print_second_bar:
+	lodsb
+	mov ah, 0ch
+	int 10h
+	
+	jmp .travel_by_image
+
+    .travel_by_image:
+        inc cx
+        cmp cx, 116
+        jne print_second_bar
+        
+        mov cx, 100
+        inc dx
+        cmp dx, bx
+        jne print_second_bar
+        
+        ret
+
+update_first_bar:
     call getchar
 
     cmp al, 0x0d
     je .done
 
-    cmp al, 'd'
+    cmp al, 's'
     je .down
     
-    cmp al, 'a'
+    cmp al, 'w'
     je .up 
-    
-    jmp read_key
 
     .done:
         ret
     .up:
-        cmp bx, 0
+        cmp di, 0
         je .update
 
-        sub bx, 5
+        sub di, 5
 
         .update:
             call clear_screen
-            call load_bar
+            call load_first_bar
+            call load_second_bar
 
-        jmp read_key
+        jmp update_first_bar
 
     .down:
-        cmp bx, 180
+        cmp di, 180
         je .update_
         
-        add bx, 5
+        add di, 5
         
         .update_:
             call clear_screen
-            call load_bar
+            call load_first_bar
+            call load_second_bar
+    
 
-        jmp read_key
+update_second_bar:
+    call getchar
+
+    cmp al, 0x0d
+    je .done_s
+
+    cmp al, 'a'
+    je .down_s
+    
+    cmp al, 'd'
+    je .up_s
+
+    .done_s:
+        ret
+    .up_s:
+        cmp bx, 0
+        je .update_s
+
+        sub bx, 5
+
+        .update_s:
+            call clear_screen
+            call load_first_bar
+            call load_second_bar
+
+        jmp update_second_bar
+
+    .down_s:
+        cmp bx, 180
+        je .update_s_
+        
+        add bx, 5
+        
+        .update_s_:
+            call clear_screen
+            call load_first_bar
+            call load_second_bar
 
 getchar:
     mov ah, 0x00 
