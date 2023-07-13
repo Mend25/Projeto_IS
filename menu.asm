@@ -9,17 +9,15 @@ _start:
     xor si, si
     xor bx, bx
     
-    mov ah, 0
+    mov ah, 0 
     mov al, 12h
     int 10h
     
-    mov bl, 0xf
-    
+    mov bl, 0xf 
     mov ah, 0eh
     mov bh, 0
     mov bl, 2
-    
-    mov ah, 0x0e
+
     mov si, message1
     call print_loop
     
@@ -35,7 +33,7 @@ print_loop:
     lodsb
     cmp al, 0
     je .done
-    int 0x10
+    call putchar
     jmp print_loop
     
     .done:
@@ -58,4 +56,5 @@ done:
 
 times 510 - ($ - $$) db 0
 dw 0xaa55
+
 
