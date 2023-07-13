@@ -8,7 +8,7 @@ _start:
     xor ax, ax
     xor cx, cx
    	xor dx, dx
-    mov bx, 100
+    mov bx, 100 ;posição y inicial
 	
 	call clear_screen
     call load_bar
@@ -62,17 +62,26 @@ read_key:
     .done:
         ret
     .up:
+        cmp bx, 0
+        je .update
+
         sub bx, 5
-        
-        call clear_screen
-        call load_bar
+
+        .update:
+            call clear_screen
+            call load_bar
 
         jmp read_key
+
     .down:
+        cmp bx, 180
+        je .update_
+        
         add bx, 5
         
-        call clear_screen
-        call load_bar
+        .update_:
+            call clear_screen
+            call load_bar
 
         jmp read_key
 
