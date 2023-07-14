@@ -17,16 +17,17 @@ start:
    	xor dx, dx
     mov di, 100 ;posição y inicial da primeira barra
     mov bp, 100 ;posição y inicial da segunda barra
-    ;mov bh, 0
-    ;mov bl, 100
+    mov bx, 100
 
-    call menu
+    call clear_screen
+    call load_first_bar
+    call load_second_bar
+    call load_ball
+    
+    ;loop
 
-	; call clear_screen
-    ; call load_first_bar
-    ; call load_second_bar
-    ; call load_ball
-    ; ;loop
-    ; call game_loop
+    ;call menu
+    
+    call game_loop
 
 jmp $

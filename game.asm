@@ -1,7 +1,6 @@
 game_loop:
     call update_first_bar
     call update_second_bar
-    call load_ball
 
     jmp game_loop
 
@@ -21,6 +20,15 @@ load_second_bar:
     mov cx, 300
 	call print_second_bar
     sub bp, 16
+    ret
+
+load_ball:
+    mov si, cometa
+    mov dx, bx
+    add bx, 16
+    mov cx, 100
+	call print_ball
+    sub bx, 16
     ret
 
 print_first_bar:
@@ -61,6 +69,25 @@ print_second_bar:
         
         ret
 
+print_ball:
+	lodsb
+	mov ah, 0ch
+	int 10h
+	
+	jmp .travel_by_image
+
+    .travel_by_image:
+        inc cx
+        cmp cx, 116;alterar
+        jne print_ball
+        
+        mov cx, 100;alterar
+        inc dx
+        cmp dx, bx
+        jne print_ball
+        
+        ret
+
 update_first_bar:
     call getchar
 
@@ -85,6 +112,7 @@ update_first_bar:
             call clear_screen
             call load_first_bar
             call load_second_bar
+            call load_ball
 
         jmp update_first_bar
 
@@ -98,6 +126,7 @@ update_first_bar:
             call clear_screen
             call load_first_bar
             call load_second_bar
+            call load_ball
 
         jmp update_first_bar
     
@@ -126,6 +155,7 @@ update_second_bar:
             call clear_screen
             call load_first_bar
             call load_second_bar
+            call load_ball
 
         jmp update_second_bar
 
@@ -139,6 +169,7 @@ update_second_bar:
             call clear_screen
             call load_first_bar
             call load_second_bar
+            call load_ball
         
         jmp update_second_bar
 
@@ -148,7 +179,7 @@ getchar:
     ret
 
 clear_screen:
-    mov ah, 0xA
+    mov ah, 0
 	mov al, 13h
 	int 10h
     ret
@@ -201,16 +232,6 @@ clear_screen:
 ;         mov bh, 0
 ;         jmp .movement
 
-load_ball:
-    mov ah, 02h   ; Função para definir a posição do cursor
-mov bh, 0     ; Página de vídeo (0 para modo texto padrão)
-mov dh, 10    ; Linha (0 a 24)
-mov dl, 10    ; Coluna (0 a 79)
-int 10h       ; Chama a interrupção de vídeo BIOS
-    mov al, '#'
-    mov ah, 0x0e
-    int 10h 
-    ret
 
 done:
     jmp $
