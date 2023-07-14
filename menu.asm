@@ -1,7 +1,7 @@
 org 0x7c00
 jmp _start
 
-message1 db "                        SOCCER PONG", 10, 13, 10, 13, "Press enter to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "                Instructions", 0
+message1 db "                        SOCCER PONG", 10, 13, 10, 13, "Press enter to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "                Instructions", 10, 13, 10, 13, "Player 1:", 10, 13, 10, 13,"W -> subir", 10, 13, "S -> descer", 10, 13, 10, 13, "Player 2", 10, 13, 10, 13, "O -> subir", 10, 13, "L -> descer" , 0
 
 _start:
     xor ax, ax
@@ -19,6 +19,14 @@ _start:
 
     mov si, message1
     call print_loop
+    xor ax, ax
+    call waitStart
+    
+    xor ax, ax
+    
+    mov ah, 0 
+    mov al, 12h
+    int 10h
 
     call done
     
@@ -33,6 +41,18 @@ print_loop:
     .done:
         ret    
 
+
+waitStart:
+    call getchar
+    
+    cmp al, 0x0d
+    je .done
+    
+    jmp waitStart
+    
+    .done:
+        ret
+
 endl:
     mov ah, 0x0a
     call putchar
@@ -44,11 +64,14 @@ putchar:
     mov ah, 0x0e
     int 10h
     ret
-    
+
+getchar:
+    mov ah, 0x00 
+    int 16h
+    ret
+
 done:
     jmp $
 
 times 510 - ($ - $$) db 0
 dw 0xaa55
-
-
