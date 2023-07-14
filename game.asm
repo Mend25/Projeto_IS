@@ -2,7 +2,7 @@ org 0x7c00
 jmp 0x0000:_start
 
 flag db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 7, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 7, 8, 8, 8, 8, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 8, 8, 8, 8, 3, 1, 8, 8, 8, 8, 1, 8, 0, 0, 0, 0, 0, 0, 8, 8, 1, 3, 9, 9, 8, 1, 9, 8, 0, 0, 0, 0, 0, 0, 8, 8, 9, 9, 15, 15, 9, 9, 9, 8, 0, 0, 0, 0, 8, 0, 8, 9, 9, 9, 9, 3, 9, 9, 9, 1, 0, 0, 0, 0, 8, 8, 8, 9, 15, 15, 15, 3, 9, 9, 9, 1, 0, 0, 0, 0, 8, 0, 8, 9, 9, 9, 15, 15, 9, 9, 3, 8, 0, 0, 0, 0, 8, 8, 8, 8, 8, 9, 9, 9, 9, 8, 8, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 8, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 
-ball db '#'
+
 
 _start:
 	;setup
@@ -11,12 +11,13 @@ _start:
    	xor dx, dx
     mov di, 100 ;posição y inicial da primeira barra
     mov bp, 100 ;posição y inicial da segunda barra
-    mov bx, 100
-    
+    ;mov bh, 0
+    ;mov bl, 100
+
 	call clear_screen
     call load_first_bar
     call load_second_bar
-
+    call load_ball
     ;loop
     call game_loop
 
@@ -25,11 +26,10 @@ _start:
 game_loop:
     call update_first_bar
     call update_second_bar
+    call load_ball
 
     jmp game_loop
 
-load_ball:
-    mov si, ball
 
 load_first_bar:
     mov si, flag
@@ -177,6 +177,60 @@ clear_screen:
     mov ah, 0
 	mov al, 13h
 	int 10h
+    ret
+
+; update_ball:
+;     cmp bl, 0
+;     je .turn_right    
+    
+;     cmp bl, 200
+;     je .turn_left
+
+;     .movement:
+;         cmp bh, 1
+;         je .left
+
+;         cmp bh, 0
+;         je .right
+
+;         .left:
+;             call clear_screen
+            
+;             mov dx, 100
+            
+;             add bl, 5
+            
+;             mov cl, bl
+;             mov ch, 0
+            
+;             call load_ball
+;             jmp update_ball
+
+;         .right:
+;             call clear_screen
+            
+;             mov dx, 100
+            
+;             sub bl, 5
+            
+;             mov cl, bl
+;             mov ch, 0
+            
+;             call load_ball
+;             jmp update_ball
+
+;     .turn_left:
+;         mov bh, 1
+;         jmp .movement
+
+;     .turn_right:
+;         mov bh, 0
+;         jmp .movement
+
+load_ball:
+    mov al, '#'
+    mov ah, 0x0e
+    int 10h 
     ret
 
 done:
