@@ -148,7 +148,7 @@ getchar:
     ret
 
 clear_screen:
-    mov ah, 0
+    mov ah, 0xA
 	mov al, 13h
 	int 10h
     ret
