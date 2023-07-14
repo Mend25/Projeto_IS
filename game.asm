@@ -1,7 +1,7 @@
 game_loop:
     call update_first_bar
     call update_second_bar
-    ;call load_ball
+    call load_ball
 
     jmp game_loop
 
@@ -202,6 +202,11 @@ clear_screen:
 ;         jmp .movement
 
 load_ball:
+    mov ah, 02h   ; Função para definir a posição do cursor
+mov bh, 0     ; Página de vídeo (0 para modo texto padrão)
+mov dh, 10    ; Linha (0 a 24)
+mov dl, 10    ; Coluna (0 a 79)
+int 10h       ; Chama a interrupção de vídeo BIOS
     mov al, '#'
     mov ah, 0x0e
     int 10h 

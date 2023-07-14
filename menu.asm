@@ -1,12 +1,4 @@
-org 0x7c00
-jmp _start
-
-message1 db "                    SOCCER PONG", 10, 13, 10, 13, 10, 13, 10, 13, "             Press ENTER to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "                    INSTRUCTIONS", 10, 13, 10, 13, 10, 13, "             Player 1:         Player 2:", 10, 13, 10, 13, 10, 13, "             W -> up           O -> up", 10, 13, 10, 13, "             S -> down         L -> down", 0
-_start:
-    xor ax, ax
-    xor si, si
-    xor bx, bx
-    
+menu:
     mov ah, 0 
     mov al, 13h
     int 10h
@@ -26,8 +18,6 @@ _start:
     mov ah, 0 
     mov al, 12h
     int 10h
-
-    call done
     
 
 print_loop:
@@ -42,7 +32,7 @@ print_loop:
 
 
 waitStart:
-    call getchar
+    call getchar_m
     
     cmp al, 0x0d
     je .done
@@ -64,13 +54,8 @@ putchar:
     int 10h
     ret
 
-getchar:
+getchar_m:
     mov ah, 0x00 
     int 16h
     ret
 
-done:
-    jmp $
-
-times 510 - ($ - $$) db 0
-dw 0xaa55
