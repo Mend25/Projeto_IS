@@ -1,5 +1,5 @@
 game_loop:
-    call update_first_bar
+    ;call update_first_bar
     ; call update_second_bar
     call update_ball
 
@@ -212,6 +212,26 @@ update_ball:
         call delay
         
         ret
+
+; getchar_tout:
+;     ; Configura o contador de temporização para 100ms (10 pulsos de 10ms cada)
+;     mov ax, 40h         ; 40h = 64 em decimal
+;     mov es, ax
+;     mov ax, 10          ; Configura para 10 pulsos
+;     mov bx, 0           ; Sem função específica
+;     int 15h
+
+;     ; Lê um caractere
+;     call getchar
+
+;     ; Verifica se o tempo limite foi atingido
+;     cmp timeout, 1
+;     je .timeout_reached
+
+;     .timeout_reached:
+;         mov al, 0x0d
+    ret
+
 getchar:
     mov ah, 0x00 
     int 16h
@@ -229,55 +249,6 @@ delay:
     mov ah, 86h
     int 15h
     ret
-
-; update_ball:
-;     cmp bl, 0
-;     je .turn_right    
-    
-;     cmp bl, 200
-;     je .turn_left
-
-;     .movement:
-;         cmp bh, 1
-;         je .left
-
-;         cmp bh, 0
-;         je .right
-
-;         .left:
-;             call clear_screen
-            
-;             mov dx, 100
-            
-;             add bl, 5
-            
-;             mov cl, bl
-;             mov ch, 0
-            
-;             call load_ball
-;             jmp update_ball
-
-;         .right:
-;             call clear_screen
-            
-;             mov dx, 100
-            
-;             sub bl, 5
-            
-;             mov cl, bl
-;             mov ch, 0
-            
-;             call load_ball
-;             jmp update_ball
-
-;     .turn_left:
-;         mov bh, 1
-;         jmp .movement
-
-;     .turn_right:
-;         mov bh, 0
-;         jmp .movement
-
 
 done:
     jmp $
