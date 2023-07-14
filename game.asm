@@ -1,6 +1,6 @@
 game_loop:
     ;call update_first_bar
-    ; call update_second_bar
+    call update_second_bar
     call update_ball
 
     jmp game_loop
@@ -54,7 +54,7 @@ print_first_bar:
 
 print_second_bar:
 	lodsb
-	mov ah, 0ch
+    mov ah, 0ch
 	int 10h
 	
 	jmp .travel_by_image
@@ -135,19 +135,21 @@ update_first_bar:
     
 
 update_second_bar:
-    call getchar
+    ; call getchar
+    mov al, bl
+    mov ah, 0
 
-    cmp al, 'a'
-    je .down_s
+    cmp bp, ax
+    jb .down_s
     
-    cmp al, 'd'
-    je .up_s
+    cmp bp, ax
+    ja .up_s
 
     .done_s:
         ret
     .up_s:
-        cmp bp, 0
-        je .update_s
+        ; cmp bp, 0
+        ; je .update_s
 
         sub bp, 5
 
@@ -160,8 +162,8 @@ update_second_bar:
         jmp update_second_bar
 
     .down_s:
-        cmp bp, 180
-        je .update_s_
+        ; cmp bp, 180
+        ; je .update_s_
         
         add bp, 5
         
