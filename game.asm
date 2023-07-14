@@ -1,35 +1,9 @@
-org 0x7c00
-jmp 0x0000:_start
-
-flag db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 7, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 7, 8, 8, 8, 8, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 8, 8, 8, 8, 3, 1, 8, 8, 8, 8, 1, 8, 0, 0, 0, 0, 0, 0, 8, 8, 1, 3, 9, 9, 8, 1, 9, 8, 0, 0, 0, 0, 0, 0, 8, 8, 9, 9, 15, 15, 9, 9, 9, 8, 0, 0, 0, 0, 8, 0, 8, 9, 9, 9, 9, 3, 9, 9, 9, 1, 0, 0, 0, 0, 8, 8, 8, 9, 15, 15, 15, 3, 9, 9, 9, 1, 0, 0, 0, 0, 8, 0, 8, 9, 9, 9, 15, 15, 9, 9, 3, 8, 0, 0, 0, 0, 8, 8, 8, 8, 8, 9, 9, 9, 9, 8, 8, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 8, 1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 
-
-
-_start:
-	;setup
-    xor ax, ax
-    xor cx, cx
-   	xor dx, dx
-    mov di, 100 ;posição y inicial da primeira barra
-    mov bp, 100 ;posição y inicial da segunda barra
-    ;mov bh, 0
-    ;mov bl, 100
-
-	call clear_screen
-    call load_first_bar
-    call load_second_bar
-    call load_ball
-    ;loop
-    call game_loop
-
-	jmp done
-
 game_loop:
     call update_first_bar
     call update_second_bar
-    call load_ball
+    ;call load_ball
 
     jmp game_loop
-
 
 load_first_bar:
     mov si, flag
@@ -236,5 +210,3 @@ load_ball:
 done:
     jmp $
 
-times 510 - ($ - $$) db 0
-dw 0xaa55
