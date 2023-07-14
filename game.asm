@@ -1,6 +1,7 @@
 game_loop:
     call update_first_bar
-    call update_second_bar
+    ; call update_second_bar
+    call update_ball
 
     jmp game_loop
 
@@ -114,8 +115,9 @@ update_first_bar:
             call load_first_bar
             call load_second_bar
             call load_ball
-
-        jmp update_first_bar
+        
+        ret
+        ;jmp update_first_bar
 
     .down:
         cmp di, 180
@@ -128,15 +130,12 @@ update_first_bar:
             call load_first_bar
             call load_second_bar
             call load_ball
-
-        jmp update_first_bar
+        ret
+        ;jmp update_first_bar
     
 
 update_second_bar:
     call getchar
-
-    cmp al, 0x0d
-    je .done_s
 
     cmp al, 'a'
     je .down_s
@@ -175,8 +174,44 @@ update_second_bar:
         jmp update_second_bar
 
 update_ball:
-    ret
+    cmp bl, 180
+    ja .goup
 
+    cmp bl, 0
+    jbe .godown
+
+    .ball_movement:
+        cmp bh, 1
+        je .up_ball
+
+        cmp bh, 0
+        je .down_ball
+
+    .goup:
+        mov bh, 1
+        jmp .ball_movement
+
+    .godown:
+        mov bh, 0
+        jmp .ball_movement
+
+    .up_ball:
+        sub bl, 5
+        jmp .update_movement
+
+    .down_ball:
+        add bl, 5
+        jmp .update_movement
+
+    .update_movement:
+        call clear_screen
+        call load_first_bar
+        call load_second_bar
+        call load_ball
+
+        call delay
+        
+        ret
 getchar:
     mov ah, 0x00 
     int 16h
@@ -186,6 +221,13 @@ clear_screen:
     mov ah, 0
 	mov al, 13h
 	int 10h
+    ret
+
+delay:
+	mov cx, 01h
+    mov dx, 86a0h
+    mov ah, 86h
+    int 15h
     ret
 
 ; update_ball:
