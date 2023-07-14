@@ -24,11 +24,12 @@ load_second_bar:
 
 load_ball:
     mov si, cometa
-    mov dx, bx
-    add bx, 16
+    mov dh, 0
+    mov dl, bl
+    add bl, 16
     mov cx, 100
 	call print_ball
-    sub bx, 16
+    sub bl, 16
     ret
 
 print_first_bar:
@@ -82,8 +83,8 @@ print_ball:
         jne print_ball
         
         mov cx, 100;alterar
-        inc dx
-        cmp dx, bx
+        inc dl
+        cmp dl, bl
         jne print_ball
         
         ret
@@ -172,6 +173,9 @@ update_second_bar:
             call load_ball
         
         jmp update_second_bar
+
+update_ball:
+    ret
 
 getchar:
     mov ah, 0x00 

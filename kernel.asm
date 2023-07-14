@@ -17,7 +17,8 @@ start:
    	xor dx, dx
     mov di, 100 ;posição y inicial da primeira barra
     mov bp, 100 ;posição y inicial da segunda barra
-    mov bx, 100
+    mov bh, 0
+    mov bl, 100
 
     call clear_screen
     call load_first_bar
