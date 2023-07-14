@@ -8,7 +8,7 @@ _start:
     xor bx, bx
     
     mov ah, 0 
-    mov al, 03h
+    mov al, 12h
     int 10h
     
     mov bl, 0xf 
