@@ -1,14 +1,14 @@
 org 0x7c00
 jmp _start
 
-message1 db "                          SOCCER PONG", 10, 13, 10, 13, 10, 13, "             Press ENTER to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "                          INSTRUCTIONS", 10, 13, 10, 13, 10, 13,  "             Player 1:                    Player 2:", 10, 13, 10, 13,"             W -> up                      O -> up", 10, 13, "             S -> down                    L -> down", 0
+message1 db "                          SOCCER PONG", 10, 13, 10, 13, 10, 13, "                     Press ENTER to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "                          INSTRUCTIONS", 10, 13, 10, 13, 10, 13, 10, 13 "             Player 1:             Player 2:", 10, 13, 10, 13,"             W -> up               O -> up", 10, 13, "             S -> down             L -> down", 0
 _start:
     xor ax, ax
     xor si, si
     xor bx, bx
     
     mov ah, 0 
-    mov al, 14h
+    mov al, 13h
     int 10h
     
     mov bl, 0xf 
