@@ -108,21 +108,7 @@ print_ball:
         
         ret
 
-update_first_bar:
-    ; mov ah, 1           ; Define o código de função 1 (leitura de caractere)
-    ; int 21h             ; Chama a interrupção 21h para ler um caractere do teclado
-    ; mov [buffer], al    ; Armazena o caractere lido no buffer
-
-    ; ; Obtém o valor atual do tempo em milissegundos
-    ; mov ah, 0           ; Define o código de função 0 (obter tempo do sistema)
-    ; int 1Ah             ; Chama a interrupção 1Ah para obter o tempo
-    ; mov cx, dx          ; Armazena o valor do contador de tempo em CX
-
-    ; ; Verifica se o tempo excede o limite
-    ; sub cx, dx          ; Subtrai o valor atual do tempo pelo valor anterior
-    ; cmp cx, timeout     ; Compara o tempo decorrido com o limite
-    ; jg .logic
-    
+update_first_bar:    
     call getchar
 
     cmp al, 's'
@@ -153,52 +139,6 @@ update_first_bar:
         mov [first_bar_posy], ax
         ret
 
-    ;.logic:
-        ;add al, 0x30
-        ; cmp al, 0x0d
-        ; je .done
-
-        ; cmp al, 's'
-        ; je .down
-        
-        ; cmp al, 'w'
-        ; je .up 
-
-        ; .done:
-        ;     ret
-        ; .up:
-        ;     mov ax, [first_bar_posy]
-        ;     cmp ax, 0
-        ;     je .update
-
-        ;     sub ax, 5
-        ;     mov [first_bar_posy], ax
-
-        ;     .update:
-        ;         call clear_screen
-        ;         call load_first_bar
-        ;         call load_second_bar
-        ;         call load_ball
-            
-        ;     jmp update_first_bar
-
-        ; .down:
-        ;     mov ax, [first_bar_posy]
-        ;     cmp ax, 180
-        ;     je .update
-
-        ;     add ax, 5
-        ;     mov [first_bar_posy], ax
-            
-        ;     .update_:
-        ;         call clear_screen
-        ;         call load_first_bar
-        ;         call load_second_bar
-        ;         call load_ball
-            
-        ;     jmp update_first_bar
-    
-
 update_second_bar:
     mov al, bl
     mov ah, 0
@@ -225,9 +165,6 @@ update_second_bar:
         jmp update_second_bar
 
     .down_s:
-        ; cmp bp, 180
-        ; je .update_s_JE
-        
         mov ax, [second_bar_posy]
         add ax, 5
         mov [second_bar_posy], ax
@@ -241,7 +178,6 @@ update_second_bar:
         jmp update_second_bar
 
 update_ball:
-    ;alterar para colisao entre as barras
     .axis_x:
         cmp bp, 280
         ja .goleft
@@ -279,7 +215,6 @@ update_ball:
 
     .goright:
         ;garante o maior
-        ;ret
         xor ax, ax
         mov dl, bl
         mov cl, [first_bar_posy]
@@ -289,11 +224,11 @@ update_ball:
         jmp .case_2
 
         .collision:
-            cmp al, 10
+            cmp al, 20
             jbe .change_sense ;ver se bateu na barra esquerda
 
         ;marca o ponto
-        ;jmp .left_ball
+
         sub bp, 5
         call .update_movement
         sub bp, 5
@@ -349,29 +284,7 @@ update_ball:
         
         ret
 
-; getchar_tout:
-;     ; Configura o contador de temporização para 100ms (10 pulsos de 10ms cada)
-;     mov ax, 40h         ; 40h = 64 em decimal
-;     mov es, ax
-;     mov ax, 10          ; Configura para 10 pulsos
-;     mov bx, 0           ; Sem função específica
-;     int 15h
-
-;     ; Lê um caractere
-;     call getchar
-
-;     ; Verifica se o tempo limite foi atingido
-;     cmp timeout, 1
-;     je .timeout_reached
-
-;     .timeout_reached:
-;         mov al, 0x0d
-    ret
-
 getchar:
-    ; mov ah, 05h
-	; int 16h
-
     mov ah, 0
 	int 16h
     ret
