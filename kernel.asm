@@ -15,6 +15,7 @@ data:
     second_bar_posy dw 100
     prev_ball_pos_x dw 100
     ball_pos_y dw 100
+    buffer db 10  
 
 start:
     ;setup

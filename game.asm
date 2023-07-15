@@ -1,5 +1,5 @@
 game_loop:
-    ;call update_first_bar
+    call update_first_bar
     call update_second_bar
     call update_ball
 
@@ -102,50 +102,66 @@ print_ball:
         ret
 
 update_first_bar:
+    ; mov ah, 1           ; Define o código de função 1 (leitura de caractere)
+    ; int 21h             ; Chama a interrupção 21h para ler um caractere do teclado
+    ; mov [buffer], al    ; Armazena o caractere lido no buffer
+
+    ; ; Obtém o valor atual do tempo em milissegundos
+    ; mov ah, 0           ; Define o código de função 0 (obter tempo do sistema)
+    ; int 1Ah             ; Chama a interrupção 1Ah para obter o tempo
+    ; mov cx, dx          ; Armazena o valor do contador de tempo em CX
+
+    ; ; Verifica se o tempo excede o limite
+    ; sub cx, dx          ; Subtrai o valor atual do tempo pelo valor anterior
+    ; cmp cx, timeout     ; Compara o tempo decorrido com o limite
+    ; jg .logic
+
     call getchar
 
-    cmp al, 0x0d
-    je .done
+    .logic:
+        ;add al, 0x30
+        cmp al, 0x0d
+        je .done
 
-    cmp al, 's'
-    je .down
-    
-    cmp al, 'w'
-    je .up 
-
-    .done:
-        ret
-    .up:
-        mov ax, [first_bar_posy]
-        cmp ax, 0
-        je .update
-
-        sub ax, 5
-        mov [first_bar_posy], ax
-
-        .update:
-            call clear_screen
-            call load_first_bar
-            call load_second_bar
-            call load_ball
+        cmp al, 's'
+        je .down
         
-        jmp update_first_bar
+        cmp al, 'w'
+        je .up 
 
-    .down:
-        mov ax, [first_bar_posy]
-        cmp ax, 180
-        je .update
+        .done:
+            ret
+        .up:
+            mov ax, [first_bar_posy]
+            cmp ax, 0
+            je .update
 
-        add ax, 5
-        mov [first_bar_posy], ax
-        
-        .update_:
-            call clear_screen
-            call load_first_bar
-            call load_second_bar
-            call load_ball
-        
-        jmp update_first_bar
+            sub ax, 5
+            mov [first_bar_posy], ax
+
+            .update:
+                call clear_screen
+                call load_first_bar
+                call load_second_bar
+                call load_ball
+            
+            jmp update_first_bar
+
+        .down:
+            mov ax, [first_bar_posy]
+            cmp ax, 180
+            je .update
+
+            add ax, 5
+            mov [first_bar_posy], ax
+            
+            .update_:
+                call clear_screen
+                call load_first_bar
+                call load_second_bar
+                call load_ball
+            
+            jmp update_first_bar
     
 
 update_second_bar:
@@ -318,8 +334,8 @@ update_ball:
     ret
 
 getchar:
-    mov ah, 0x00 
-    int 16h
+    mov ah, 0
+	int 16h
     ret
 
 clear_screen:
