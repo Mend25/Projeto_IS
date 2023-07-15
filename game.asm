@@ -256,7 +256,7 @@ update_ball:
         call .update_movement
         sub bp, 5
         call .update_movement
-        
+        call delay1s
         jmp reset
     
     .goup:
@@ -324,6 +324,13 @@ delay:
     mov ah, 86h
     int 15h
     ret
+
+delay1s:
+  mov cx, 0fh
+  mov dx, 4240h
+  mov ah, 86h
+  int 15h
+  ret
 
 done:
     jmp $
