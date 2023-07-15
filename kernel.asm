@@ -13,6 +13,7 @@ data:
     timeout db 0 
     first_bar_posy dw 100
     second_bar_posy dw 100
+    prev_ball_pos_x dw 100
     ball_pos_y dw 0
 
 start:
@@ -20,10 +21,10 @@ start:
     xor ax, ax
     xor cx, cx
    	xor dx, dx
-    xor di, di ;NAO TA SENDO USADO
-    xor bp, bp ;NAO TA SENDO USADO
-    mov bh, 0  ;flag de sentido
-    mov bl, 0   ;posição y inicial da bola
+    xor di, di ;flag de sentido x
+    xor bp, bp ;posição x da bola
+    mov bh, 0  ;flag de sentido y
+    mov bl, 0  ;posição y da bola
 
     call clear_screen
     call load_first_bar

@@ -1,7 +1,7 @@
 game_loop:
-    call update_first_bar
-    ; call update_second_bar
-    ; call update_ball
+    ;call update_first_bar
+    call update_second_bar
+    call update_ball
 
     jmp game_loop
 
@@ -36,9 +36,12 @@ load_ball:
     mov dh, 0
     mov dl, bl
     add bl, 16
-    mov cx, 100
+    mov cx, bp
+    mov [prev_ball_pos_x] , bp
+    add bp, 16
 	call print_ball
     sub bl, 16
+    sub bp, 16
     ret
 
 print_first_bar:
@@ -88,10 +91,10 @@ print_ball:
 
     .travel_by_image:
         inc cx
-        cmp cx, 116;alterar
+        cmp cx, bp;alterar
         jne print_ball
         
-        mov cx, 100;alterar
+        mov cx, [prev_ball_pos_x];alterar
         inc dl
         cmp dl, bl
         jne print_ball
@@ -187,18 +190,44 @@ update_second_bar:
         jmp update_second_bar
 
 update_ball:
-    cmp bl, 180
-    ja .goup
+    ;alterar para colisao entre as barras
+    .axis_x:
+        cmp bp, 300
+        ja .goleft
 
-    cmp bl, 0
-    jbe .godown
+        cmp bp, 0
+        jbe .goright
+
+    .axis_y:
+        cmp bl, 180
+        ja .goup
+
+        cmp bl, 0
+        jbe .godown
 
     .ball_movement:
-        cmp bh, 1
-        je .up_ball
+        .movement_x:
+            cmp di, 1
+            je .right_ball
 
-        cmp bh, 0
-        je .down_ball
+            cmp di, 0
+            je .left_ball
+
+        .movement_y:
+            cmp bh, 1
+            je .up_ball
+
+            cmp bh, 0
+            je .down_ball
+
+
+    .goleft:
+        mov di, 0
+        jmp .axis_y
+
+    .goright:
+        mov di, 1
+        jmp .axis_y  
 
     .goup:
         mov bh, 1
@@ -216,6 +245,14 @@ update_ball:
         add bl, 5
         jmp .update_movement
 
+    .left_ball:
+        sub bp, 5
+        jmp .movement_y
+
+    .right_ball:
+        add bp, 5
+        jmp .movement_y
+    
     .update_movement:
         call clear_screen
         call load_first_bar
