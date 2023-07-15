@@ -41,7 +41,7 @@ start:
     xor cx, cx
    	xor dx, dx
     mov di, 1 ;flag de sentido x
-    mov bp, 100;posição x da bola
+    mov bp, 200;posição x da bola
     mov bh, 0  ;flag de sentido y
     mov bl, 10  ;posição y da bola
 
