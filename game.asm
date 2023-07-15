@@ -184,7 +184,7 @@ update_second_bar:
             call load_first_bar
             call load_second_bar
             call load_ball
-            mov si, score_name
+            call build_score
             call prints
             ;call put_score
 
@@ -200,7 +200,7 @@ update_second_bar:
             call load_first_bar
             call load_second_bar
             call load_ball
-            mov si, score_name
+            call build_score
             call prints
             ;call put_score
         
@@ -309,7 +309,7 @@ update_ball:
         call load_second_bar
         call load_ball
 
-        mov si, score_name
+        call build_score
         call prints
 
         call delay
@@ -339,6 +339,12 @@ prints:
     
     .done_l:
         ret 
+
+build_score:
+    mov ax, score_name
+    add ax, X
+    mov si, ax
+    ret
 
 clear_screen:
     mov ah, 0
