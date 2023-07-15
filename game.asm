@@ -119,16 +119,14 @@ update_first_bar:
 
     .down:
         mov ax, [first_bar_posy]
-        cmp ax, 0
-        jne .move_down
-        mov [first_bar_posy], ax
+        cmp ax, 180
+        jb .move_down
         ret
 
     .up:
         mov ax, [first_bar_posy]
         cmp ax, 0
-        jne .move_up
-        mov [first_bar_posy], ax
+        ja .move_up
         ret
 
     .move_up:
