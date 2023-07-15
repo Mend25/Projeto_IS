@@ -345,11 +345,30 @@ build_score:
 
 
     mov ax, counter
-    add ax, '0'
+    xor cx, cx
+    call to_string
+    mov si, cx
     mov si, ax
     call prints
 
     ret
+    
+to_string:
+    cmp ax, 9
+    ja .above_nine
+    
+    add cx, '0'
+    add ax, '0'
+    
+    jmp .done
+    
+    .above_nine:
+        sub ax, 10
+        inc cx
+        jmp to_string
+    
+    .done:
+        ret
 
 clear_screen:
     mov ah, 0
