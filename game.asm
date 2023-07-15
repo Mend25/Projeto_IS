@@ -347,9 +347,6 @@ build_score:
     mov cx, counter
     xor ax, ax
     call to_string
-    mov si, cx
-    call prints
-    mov si, ax
     call prints
 
     ret
