@@ -16,11 +16,15 @@ load_first_bar:
 
 load_second_bar:
     mov si, flag
-    mov dx, bp
-    add bp, 16
+    mov dx, [second_bar_posy]
+    add dx, 16
+    mov [second_bar_posy], dx
+    sub dx, 16
     mov cx, 300
 	call print_second_bar
-    sub bp, 16
+    mov dx, [second_bar_posy]
+    sub dx, 16
+    mov [second_bar_posy], dx
     ret
 
 load_ball:
@@ -66,7 +70,7 @@ print_second_bar:
         
         mov cx, 300
         inc dx
-        cmp dx, bp
+        cmp dx, [second_bar_posy]
         jne print_second_bar
         
         ret
@@ -139,10 +143,10 @@ update_second_bar:
     mov al, bl
     mov ah, 0
 
-    cmp bp, ax
+    cmp [second_bar_posy], ax
     jb .down_s
     
-    cmp bp, ax
+    cmp [second_bar_posy], ax
     ja .up_s
 
     .done_s:
@@ -150,8 +154,9 @@ update_second_bar:
     .up_s:
         ; cmp bp, 0
         ; je .update_s
-
-        sub bp, 5
+        mov ax, [second_bar_posy]
+        sub ax, 5
+        mov [second_bar_posy], ax
 
         .update_s:
             call clear_screen
@@ -165,7 +170,9 @@ update_second_bar:
         ; cmp bp, 180
         ; je .update_s_
         
-        add bp, 5
+        mov ax, [second_bar_posy]
+        add ax, 5
+        mov [second_bar_posy], ax
         
         .update_s_:
             call clear_screen

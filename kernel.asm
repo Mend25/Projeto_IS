@@ -11,6 +11,8 @@ data:
     message1 db "             SOCCER PONG", 10, 13, 10, 13, 10, 13, 10, 13, "        Press ENTER to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "             INSTRUCTIONS", 10, 13, 10, 13, 10, 13, "        Player 1:       Player 2:", 10, 13, 10, 13, 10, 13, "        W -> up           O -> up", 10, 13, 10, 13, "      S -> down         L -> down", 0
     delay_count dw 5000
     timeout db 0 
+    second_bar_posy dw 0
+    ball_pos_y dw 0
 
 start:
     ;setup
