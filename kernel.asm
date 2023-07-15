@@ -14,17 +14,17 @@ data:
     first_bar_posy dw 100
     second_bar_posy dw 100
     prev_ball_pos_x dw 100
-    ball_pos_y dw 0
+    ball_pos_y dw 100
 
 start:
     ;setup
     xor ax, ax
     xor cx, cx
    	xor dx, dx
-    xor di, di ;flag de sentido x
-    xor bp, bp ;posição x da bola
+    mov di, 1 ;flag de sentido x
+    mov bp, 100;posição x da bola
     mov bh, 0  ;flag de sentido y
-    mov bl, 0  ;posição y da bola
+    mov bl, 10  ;posição y da bola
 
     call clear_screen
     call load_first_bar

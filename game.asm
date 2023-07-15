@@ -192,7 +192,7 @@ update_second_bar:
 update_ball:
     ;alterar para colisao entre as barras
     .axis_x:
-        cmp bp, 300
+        cmp bp, 280
         ja .goleft
 
         cmp bp, 0
@@ -213,6 +213,7 @@ update_ball:
             cmp di, 0
             je .left_ball
 
+            ret
         .movement_y:
             cmp bh, 1
             je .up_ball
@@ -220,15 +221,29 @@ update_ball:
             cmp bh, 0
             je .down_ball
 
-
+            ret
     .goleft:
         mov di, 0
         jmp .axis_y
 
     .goright:
-        mov di, 1
-        jmp .axis_y  
+        ;garante o maior
+        ;ret
+        xor ax, ax
+        mov dl, bl
+        mov cl, [first_bar_posy]
+        cmp cl, dl
+        jbe .case_1
 
+        jmp .case_2
+
+        .collision:
+            cmp al, 10
+            je .change_sense ;ver se bateu na barra esquerda
+
+        ;marca o ponto
+        ret
+    
     .goup:
         mov bh, 1
         jmp .ball_movement
@@ -253,6 +268,20 @@ update_ball:
         add bp, 5
         jmp .movement_y
     
+    .case_1:
+        mov al, bl
+        sub al, [first_bar_posy]
+        jmp .collision
+
+    .case_2:
+        mov al, [first_bar_posy]
+        sub al, bl
+        jmp .collision
+
+    .change_sense:
+        mov di, 1
+        jmp .axis_y  
+
     .update_movement:
         call clear_screen
         call load_first_bar
