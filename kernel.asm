@@ -11,7 +11,8 @@ data:
     message1 db "             SOCCER PONG", 10, 13, 10, 13, 10, 13, 10, 13, "        Press ENTER to start", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "             INSTRUCTIONS", 10, 13, 10, 13, 10, 13, "        Player 1:       Player 2:", 10, 13, 10, 13, 10, 13, "        W -> up           O -> up", 10, 13, 10, 13, "      S -> down         L -> down", 0
     delay_count dw 5000
     timeout db 0 
-    second_bar_posy dw 0
+    first_bar_posy dw 100
+    second_bar_posy dw 100
     ball_pos_y dw 0
 
 start:
@@ -19,9 +20,9 @@ start:
     xor ax, ax
     xor cx, cx
    	xor dx, dx
-    mov di, 100 ;posição y inicial da primeira barra
-    mov bp, 100 ;posição y inicial da segunda barra
-    mov bh, 0 
+    xor di, di ;NAO TA SENDO USADO
+    xor bp, bp ;NAO TA SENDO USADO
+    mov bh, 0  ;flag de sentido
     mov bl, 0   ;posição y inicial da bola
 
     call clear_screen

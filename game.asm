@@ -1,17 +1,21 @@
 game_loop:
-    ;call update_first_bar
-    call update_second_bar
-    call update_ball
+    call update_first_bar
+    ; call update_second_bar
+    ; call update_ball
 
     jmp game_loop
 
 load_first_bar:
     mov si, flag
-    mov dx, di
-    add di, 16
+    mov dx, [first_bar_posy]
+    add dx, 16
+    mov [first_bar_posy], dx
+    sub dx, 16
     xor cx, cx
 	call print_first_bar
-    sub di, 16
+    mov dx, [first_bar_posy]
+    sub dx, 16
+    mov [first_bar_posy], dx
     ret
 
 load_second_bar:
@@ -51,7 +55,7 @@ print_first_bar:
         
         xor cx, cx
         inc dx
-        cmp dx, di
+        cmp dx, [first_bar_posy]
         jne print_first_bar
         
         ret
@@ -109,10 +113,12 @@ update_first_bar:
     .done:
         ret
     .up:
-        cmp di, 0
+        mov ax, [first_bar_posy]
+        cmp ax, 0
         je .update
 
-        sub di, 5
+        sub ax, 5
+        mov [first_bar_posy], ax
 
         .update:
             call clear_screen
@@ -120,26 +126,26 @@ update_first_bar:
             call load_second_bar
             call load_ball
         
-        ret
-        ;jmp update_first_bar
+        jmp update_first_bar
 
     .down:
-        cmp di, 180
-        je .update_
-        
-        add di, 5
+        mov ax, [first_bar_posy]
+        cmp ax, 180
+        je .update
+
+        add ax, 5
+        mov [first_bar_posy], ax
         
         .update_:
             call clear_screen
             call load_first_bar
             call load_second_bar
             call load_ball
-        ret
-        ;jmp update_first_bar
+        
+        jmp update_first_bar
     
 
 update_second_bar:
-    ; call getchar
     mov al, bl
     mov ah, 0
 
@@ -152,8 +158,6 @@ update_second_bar:
     .done_s:
         ret
     .up_s:
-        ; cmp bp, 0
-        ; je .update_s
         mov ax, [second_bar_posy]
         sub ax, 5
         mov [second_bar_posy], ax
