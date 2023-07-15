@@ -195,7 +195,7 @@ update_ball:
         cmp bp, 280
         ja .goleft
 
-        cmp bp, 0
+        cmp bp, 15
         jbe .goright
 
     .axis_y:
@@ -239,10 +239,16 @@ update_ball:
 
         .collision:
             cmp al, 10
-            je .change_sense ;ver se bateu na barra esquerda
+            jbe .change_sense ;ver se bateu na barra esquerda
 
         ;marca o ponto
-        ret
+        ;jmp .left_ball
+        sub bp, 5
+        call .update_movement
+        sub bp, 5
+        call .update_movement
+        
+        jmp $
     
     .goup:
         mov bh, 1
