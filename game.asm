@@ -121,12 +121,14 @@ update_first_bar:
         mov ax, [first_bar_posy]
         cmp ax, 0
         jne .move_down
+        mov [first_bar_posy], ax
         ret
 
     .up:
         mov ax, [first_bar_posy]
         cmp ax, 0
         jne .move_up
+        mov [first_bar_posy], ax
         ret
 
     .move_up:
