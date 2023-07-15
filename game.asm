@@ -348,6 +348,7 @@ build_score:
     xor cx, cx
     call to_string
     mov si, cx
+    call prints
     mov si, ax
     call prints
 
