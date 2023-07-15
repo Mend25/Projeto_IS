@@ -12,6 +12,29 @@ machine:
 
     jmp game_loop
 
+reset:
+    mov ax, [first_bar_posy]
+    mov ax, 100
+    mov [first_bar_posy], ax
+
+    mov ax, [second_bar_posy]
+    mov ax, 100
+    mov [second_bar_posy], ax
+
+    mov ax, [prev_ball_pos_x]
+    mov ax, 100
+    mov [prev_ball_pos_x], ax
+
+    xor ax, ax
+    xor cx, cx
+   	xor dx, dx
+    mov di, 1 ;flag de sentido x
+    mov bp, 200;posição x da bola
+    mov bh, 0  ;flag de sentido y
+    mov bl, 10  ;posição y da bola
+
+    call game_loop
+
 load_first_bar:
     mov si, flag
     mov dx, [first_bar_posy]
@@ -234,7 +257,7 @@ update_ball:
         sub bp, 5
         call .update_movement
         
-        jmp $
+        jmp reset
     
     .goup:
         mov bh, 1
