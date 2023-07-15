@@ -16,7 +16,7 @@ data:
     score dw 0
     counter dw 0
     score_name db "               SOCCER PONG",0
-    X db " x",0
+    X db " X",0
 
 start:
     ;setup menu
