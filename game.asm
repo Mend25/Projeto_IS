@@ -185,7 +185,6 @@ update_second_bar:
             call load_second_bar
             call load_ball
             call build_score
-            call prints
             ;call put_score
 
         jmp update_second_bar
@@ -201,7 +200,6 @@ update_second_bar:
             call load_second_bar
             call load_ball
             call build_score
-            call prints
             ;call put_score
         
         jmp update_second_bar
@@ -310,7 +308,6 @@ update_ball:
         call load_ball
 
         call build_score
-        call prints
 
         call delay
 
@@ -341,9 +338,17 @@ prints:
         ret 
 
 build_score:
-    mov ax, score_name
-    add ax, X
+    mov si, score_name
+    call prints
+    mov si, X
+    call prints
+
+
+    mov ax, counter
+    add ax, '0'
     mov si, ax
+    call prints
+
     ret
 
 clear_screen:
