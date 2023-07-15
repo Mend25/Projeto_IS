@@ -290,8 +290,6 @@ prints:
 build_score:
     mov si, score_name
     call prints
-    call prints
-
 
     mov ax, counter
     add ax, '0'
