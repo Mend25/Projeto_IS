@@ -1,5 +1,5 @@
 game_loop:
-    call update_first_bar
+    ;call update_first_bar
     call update_second_bar
     call update_ball
 

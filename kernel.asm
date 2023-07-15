@@ -18,7 +18,25 @@ data:
     buffer db 10  
 
 start:
-    ;setup
+    ;setup menu
+    xor ax, ax
+    xor si, si
+    xor bx, bx
+    
+    mov ah, 0 
+    mov al, 13h
+    int 10h
+    
+    mov bl, 0xf 
+    mov ah, 0eh
+    mov bh, 0
+    mov bl, 2
+
+    ;loop menu
+
+    call menu
+
+    ;setup game
     xor ax, ax
     xor cx, cx
    	xor dx, dx
@@ -33,9 +51,6 @@ start:
     call load_ball
     
     ;loop
-
-    ;call menu
-    
     call game_loop
 
 jmp $
