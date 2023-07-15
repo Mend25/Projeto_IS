@@ -344,8 +344,8 @@ build_score:
     call prints
 
 
-    mov ax, counter
-    xor cx, cx
+    mov cx, counter
+    xor ax, ax
     call to_string
     mov si, cx
     call prints
@@ -355,17 +355,20 @@ build_score:
     ret
     
 to_string:
-    cmp ax, 9
+    cmp cx, 9
     ja .above_nine
     
-    add cx, '0'
     add ax, '0'
+    stosb
+    mov ax, cx
+    add ax, '0'
+    stosb
     
     jmp .done
     
     .above_nine:
-        sub ax, 10
-        inc cx
+        sub cx, 10
+        inc ax
         jmp to_string
     
     .done:
