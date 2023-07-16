@@ -176,9 +176,6 @@ update_second_bar:
             call load_first_bar
             call load_second_bar
             call load_ball
-            ; call build_score
-            ; call prints
-            ;call put_score
 
         jmp update_second_bar
 
@@ -192,9 +189,6 @@ update_second_bar:
             call load_first_bar
             call load_second_bar
             call load_ball
-            ; call build_score
-            ; call prints
-            ; call put_score
         
         jmp update_second_bar
 update_ball:
@@ -289,13 +283,8 @@ update_ball:
         call load_second_bar
         call load_ball
 
-        ; call build_score
-        ; call prints
-
         call delay
 
-        
-        ;call put_score
         ret
 
 getchar:
@@ -310,16 +299,6 @@ put_score:
     int 10h
     mov bl, cl
     ret
-
-prints:
-    lodsb
-    cmp al, 0
-    je .done_l
-    call put_score
-    jmp prints
-    
-    .done_l:
-        ret 
 
 build_score:
     mov si, score_name
@@ -346,9 +325,6 @@ clear_screen:
 	int 10h
     call build_score
     ret
-
-printNumber:
-    
 
 delay:
 	mov cx, 01h
