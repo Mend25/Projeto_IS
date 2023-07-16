@@ -191,17 +191,20 @@ update_second_bar:
             call load_ball
         
         jmp update_second_bar
+
 update_ball:
     .axis_x:
         cmp bp, 280
         ja .goleft
         cmp bp, 15
         jbe .goright
+
     .axis_y:
         cmp bl, 180
         ja .goup
         cmp bl, 0
         jbe .godown
+
     .ball_movement:
         .movement_x:
             cmp di, 1
@@ -209,15 +212,18 @@ update_ball:
             cmp di, 0
             je .left_ball
             ret
+
         .movement_y:
             cmp bh, 1
             je .up_ball
             cmp bh, 0
             je .down_ball
             ret
+
     .goleft:
         mov di, 0
         jmp .axis_y
+
     .goright:
         ;garante o maior
         xor ax, ax
@@ -275,6 +281,7 @@ update_ball:
 
     .change_sense:
         mov di, 1
+        call update_score
         jmp .axis_y  
 
     .update_movement:
@@ -318,6 +325,11 @@ build_score:
     call put_score
 
     ret
+
+update_score:
+    mov ax, [counter]
+    inc ax
+    mov [counter], ax
 
 prints:
     lodsb
