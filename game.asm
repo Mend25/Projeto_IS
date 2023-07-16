@@ -28,6 +28,7 @@ reset:
     mov bp, 200;posição x da bola
     mov bh, 0  ;flag de sentido y
     mov bl, 10  ;posição y da bola
+    ;mov [counter], 0
     call game_loop
 
 load_first_bar:
@@ -140,17 +141,17 @@ update_first_bar:
 
     .up:
         mov ax, [first_bar_posy]
-        cmp ax, 0
+        cmp ax, 20
         ja .move_up
         ret
 
     .move_up:
-        sub ax, 5
+        sub ax, 3
         mov [first_bar_posy], ax
         ret
     
     .move_down:
-        add ax, 5
+        add ax, 3
         mov [first_bar_posy], ax
         ret
 
@@ -202,7 +203,7 @@ update_ball:
     .axis_y:
         cmp bl, 180
         ja .goup
-        cmp bl, 0
+        cmp bl, 20
         jbe .godown
 
     .ball_movement:
@@ -243,7 +244,8 @@ update_ball:
         sub bp, 5
         call .update_movement
         call delay1s
-        jmp reset
+        ;jmp reset
+        jmp $
     
     .goup:
         mov bh, 1
