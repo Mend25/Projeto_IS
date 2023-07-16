@@ -114,10 +114,10 @@ print_ball:
 	jmp .travel_by_image
     .travel_by_image:
         inc cx
-        cmp cx, bp;alterar
+        cmp cx, bp
         jne print_ball
         
-        mov cx, [prev_ball_pos_x];alterar
+        mov cx, [prev_ball_pos_x]
         inc dl
         cmp dl, bl
         jne print_ball
@@ -168,7 +168,7 @@ update_second_bar:
 
     .up_s:
         mov ax, [second_bar_posy]
-        sub ax, 5
+        sub ax, 10
         mov [second_bar_posy], ax
 
         .update_s:
@@ -181,7 +181,7 @@ update_second_bar:
 
     .down_s:
         mov ax, [second_bar_posy]
-        add ax, 5
+        add ax, 10
         mov [second_bar_posy], ax
         
         .update_s_:
@@ -254,19 +254,19 @@ update_ball:
         jmp .ball_movement
 
     .up_ball:
-        sub bl, 5
+        sub bl, 10
         jmp .update_movement
 
     .down_ball:
-        add bl, 5
+        add bl, 10
         jmp .update_movement
 
     .left_ball:
-        sub bp, 5
+        sub bp, 10
         jmp .movement_y
 
     .right_ball:
-        add bp, 5
+        add bp, 10
         jmp .movement_y
     
     .case_1:
