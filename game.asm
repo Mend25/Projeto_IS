@@ -240,13 +240,29 @@ update_ball:
 
         ;marca o ponto
         sub bp, 5
+        cmp bh, 0
+        je .mov_y
+        sub bl, 5
+
         call .update_movement
-        sub bp, 5
-        call .update_movement
+        
+        .continue:
+            sub bp, 5
+            cmp bh, 0
+            je .mov_y
+            sub bl, 5
+
+            call .update_movement
+            
         call delay1s
+
         ;jmp reset
         jmp $
-    
+
+        .mov_y:
+            add bl, 5
+            jmp .continue
+
     .goup:
         mov bh, 1
         jmp .ball_movement
