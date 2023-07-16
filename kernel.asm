@@ -13,9 +13,8 @@ data:
     first_bar_posy dw 100
     second_bar_posy dw 100
     prev_ball_pos_x dw 100
-    score dw 0
-    counter dw 13
-    score_name db "      SOCCER PONG | x", 0
+    counter dw 0
+    score_name db "           SOCCER PONG | x", 0
 
 start:
     ;setup menu

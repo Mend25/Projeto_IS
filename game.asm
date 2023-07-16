@@ -319,6 +319,16 @@ build_score:
 
     ret
 
+prints:
+    lodsb
+    cmp al, 0
+    je .done_l
+    call put_score
+    jmp prints
+    
+    .done_l:
+        ret 
+
 clear_screen:
     mov ah, 0
 	mov al, 13h
