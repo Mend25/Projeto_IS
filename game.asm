@@ -23,24 +23,6 @@ machine:
     ret
 
 reset:
-    ; mov ax, [first_bar_posy]
-    ; mov ax, 100
-    ; mov [first_bar_posy], ax
-    ; mov ax, [second_bar_posy]
-    ; mov ax, 100
-    ; mov [second_bar_posy], ax
-    ; mov ax, [prev_ball_pos_x]
-    ; mov ax, 100
-    ; mov [prev_ball_pos_x], ax
-    ; xor ax, ax
-    ; xor cx, cx
-   	; xor dx, dx
-    ; mov di, 1 ;flag de sentido x
-    ; mov bp, 200;posição x da bola
-    ; mov bh, 0  ;flag de sentido y
-    ; mov bl, 10  ;posição y da bola
-    ; ;mov [counter], 0
-    ; call game_loop
     call delay1s
     mov ax, 1
     mov [exit_game], ax
@@ -120,7 +102,7 @@ print_second_bar:
         cmp dx, [second_bar_posy]
         jne print_second_bar
         
-        ret    ;mov [counter], 0
+        ret
 
 print_ball:
 	lodsb
@@ -250,7 +232,7 @@ update_ball:
         jmp .case_2
 
         .collision:
-            cmp al, 30
+            cmp al, 25
             jbe .change_sense ;ver se bateu na barra esquerda
 
         ;marca o ponto
@@ -269,13 +251,8 @@ update_ball:
             call .update_movement
             jmp .finish
             
-        ;call delay1s
         .finish:
             jmp reset
-        ;jmp $
-        ; mov ax, 1
-        ; mov lost, ax
-        ;ret
         .mov_y:
             add bl, 5
             call .update_movement
