@@ -4,7 +4,7 @@ Pong versão IS! Tente ganhar da Máquina
 
 ## About
 
-Este projeto tem como finalidade descrever um bootloader de dois estágios e carraga a aplicação de um jogo similar ao clássico Pong
+Este projeto tem como finalidade implementar um bootloader de dois estágios e carraga a aplicação de um jogo similar ao clássico Pong
 
 <img src="/assets/jogo.gif">
 
