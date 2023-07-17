@@ -108,20 +108,21 @@ menu:
 	setText 13, 28, exit_message, darkGreenColor
 	setText 20, 3, highest, darkGreenColor
 
+	mov ax, [highest_score1]
 	mov dx, 0
-    	mov cx, 10
-    	div cx
+	mov cx, 10
+	div cx
 	mov dx, 0
-    	mov cx, 10
-    	div cx
-    	add ax, '0'
+	mov cx, 10
+	div cx
+	add ax, '0'
 
-    	call put_score
-    
-    	sub ax, '0'
-    	mov ax, dx
-    	add ax, '0'
-    	call put_score
+	call put_score
+
+	sub ax, '0'
+	mov ax, dx
+	add ax, '0'
+	call put_score
 	
 	call first_cursor ; Inicia a aplicação
 	
