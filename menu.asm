@@ -1,51 +1,199 @@
+%define blackColor 0
+%define blueColor 1
+%define darkGreenColor 2
+%define blue 3
+%define redColor 4
+%define lightGrayColor 7
+%define greenColor 10
+%define yellowColor 14
+%define whiteColor 15
+
+%macro setText 4
+	mov ah, 02h  ; Setando o cursor
+	mov bh, 0    ; Pagina 0
+	mov dh, %1   ; Linha
+	mov dl, %2   ; Coluna
+	int 10h
+	mov bx, %4
+	mov si, %3
+	call printf_color
+	
+%endmacro
+
+%macro drawer 1
+	mov ah, 0ch 
+	mov al, %1
+	mov bh, 0
+	
+%endmacro
+
+%macro drawSquare 4
+	mov cx, %1
+	.draw_rows:
+		mov dx, %2
+		int 10h
+		mov dx, %4
+		int 10h
+		inc cx
+		cmp cx, %3
+		je .end_column
+		jmp .draw_rows
+	.end_column:
+		mov dx, %2
+	.draw_columns:
+		mov cx, %1
+		int 10h
+		mov cx, %3
+		int 10h
+		inc dx
+		cmp dx, %4
+    jne .draw_columns
+    
+%endmacro
+
+%macro drawCursor 4
+    mov cx, %1
+	.draw_seg:
+		mov dx, %3-1
+		int 10h
+		mov dx, %3
+		int 10h
+		inc cx
+		cmp cx, %4
+		je .end_column
+		jmp .draw_seg
+	.end_column:
+		mov dx, %2
+	.draw_columns:
+		mov cx, %4-2
+		int 10h
+		mov cx, %4-1
+		int 10h
+		inc dx
+		cmp dx, %3
+	jne .draw_columns
+	
+%endmacro
+
+%macro blackBackgroundApp 4
+	mov ah, 0ch 
+	mov al, blackColor
+	mov bh, 0
+	mov cx, %1
+	mov dx, %2
+	.draw_seg:
+		int 10h
+		inc cx
+		cmp cx, %3
+		je .jump_row
+		jne .draw_seg
+	.back_column:
+		mov cx, %1
+		jmp .draw_seg
+	.jump_row:
+		inc dx
+		cmp dx, %4
+		jne .back_column
+	mov al, blue ; Voltando a cor original
+%endmacro
+
+
+
 menu:
-    mov ah, 0 
-    mov al, 13h
-    int 10h
-
-    mov bl, 0xf 
-    mov ah, 0eh
-    mov bh, 0
-    mov bl, 2
-
-    mov si, message1
-    call print_loop
-    xor ax, ax
-    call waitStart
-
-
-    xor ax, ax
-
-    mov ah, 0 
+    call initVideo
+	call draw_border ; Escreve nome de cada APP
+	call draw_box_app ; Desenha os retangulos
+	setText 1, 16, play, darkGreenColor
+	setText 6, 4, instructions, darkGreenColor
+	
+	call first_cursor ; Inicia a aplicação
+	
+	mov ah, 0 
     mov al, 12h
     int 10h
+	
+initVideo:
+	mov ah, 00h
+	mov al, 13h
+	int 10h
+    ret
+    
+draw_border:
+	drawer whiteColor
+	mov cx, 0
+	.draw_seg:
+		mov dx, 0
+		int 10h
+		mov dx, 199
+		int 10h
+		inc cx
+		cmp cx, 319
+		je .end_column
+		jmp .draw_seg
+	.end_column:
+		mov dx, 0
+	.draw_columns:
+		mov cx, 0
+		int 10h
+		mov cx, 319
+		int 10h
+		inc dx
+		cmp dx, 199
+		jne .draw_columns
+	ret
 
+draw_box_app:
+    drawer blue
+	call box_app1
+    ret
 
-print_loop:
-    lodsb
-    cmp al, 0
+box_app1: 
+    drawSquare 20, 145, 100, 180
+	blackBackgroundApp 21, 146, 100, 180
+	ret
+
+first_cursor:
+	call cursorApp
+	drawCursor 85, 54, 67, 98
+
+    call getchar
+    
+    cmp al, 13
     je .done
-    call putchar
-    jmp print_loop
-
+    cmp al, 'd'
+    je second_cursor
+  
+    
+    jmp first_cursor   
+    
     .done:
         ret
 
+cursorApp:
+	drawer blackColor
+	call cursor_app1
+	drawer darkGreenColor
+    ret
+    
+cursor_app1: 
+	drawCursor 85, 54, 67, 98
+	ret
+	
+second_cursor:
+	call cursorApp
+	drawCursor 85, 109, 122, 98
 
-waitStart:
-    call getchar_m
-
-    cmp al, 0x0d
-    je .done
-
-    cmp al, " "
+    call getchar
+    
+    cmp al, 13
     je instructions
+    cmp al, 'a'
+    je first_cursor
+ 
+    jmp second_cursor
 
-    jmp waitStart
-
-    .done:
-        ret
-
+    ret
+    
 instructions:
     xor ax, ax
     mov ah, 0 
@@ -74,21 +222,9 @@ instructions:
 
         jmp .waitButton
 
-
-
-endl:
-    mov ah, 0x0a
-    call putchar
-    mov ah, 0x0d
-    call putchar
-    ret
-
-putchar:
-    mov ah, 0x0e
-    int 10h
-    ret
-
-getchar_m:
+	
+getchar:
     mov ah, 0x00 
     int 16h
     ret
+
