@@ -15,7 +15,7 @@ data:
     prev_ball_pos_x dw 100
     counter dw 0
     play db "Play", 0
-    instruction db "Instructions", 0
+    instruction db "Rules", 0
     score_name db "           SOCCER PONG | x", 0
 
 start:
