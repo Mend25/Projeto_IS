@@ -105,7 +105,7 @@ print_second_bar:
         cmp dx, [second_bar_posy]
         jne print_second_bar
         
-        ret
+        ret    ;mov [counter], 0
 
 print_ball:
 	lodsb
@@ -320,7 +320,7 @@ getchar:
 put_score:
     mov ah, 0x0e
     mov cl, bl
-    mov bl, 0xf
+    mov bl, 0xa
     int 10h
     mov bl, cl
     ret
