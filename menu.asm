@@ -103,8 +103,8 @@ menu:
     call initVideo
 	call draw_border ; Escreve nome de cada APP
 	call draw_box_app ; Desenha os retangulos
-	setText 1, 16, play, darkGreenColor
-	setText 6, 4, instruction, darkGreenColor
+	setText 6, 4, play, darkGreenColor
+	setText 6, 27, instruction, darkGreenColor
 	
 	call first_cursor ; Inicia a aplicação
 	
