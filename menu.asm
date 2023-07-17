@@ -104,7 +104,7 @@ menu:
 	call draw_border ; Escreve nome de cada APP
 	call draw_box_app ; Desenha os retangulos
 	setText 6, 5, play, darkGreenColor
-	setText 6, 28, instruction, darkGreenColor
+	setText 6, 27, instruction, darkGreenColor
 	
 	call first_cursor ; Inicia a aplicação
 	
