@@ -222,9 +222,4 @@ instructions:
 
         jmp .waitButton
 
-	
-getchar:
-    mov ah, 0x00 
-    int 16h
-    ret
-
+	ret
