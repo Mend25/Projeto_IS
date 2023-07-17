@@ -3,6 +3,7 @@ jmp 0x0000:start
 
 %include "menu.asm"
 %include "game.asm"
+%include "final_screen.asm"
 
 data:
 	;Dados do projeto...
@@ -62,5 +63,5 @@ start:
     ; mov ax, exit
     ; cmp ax, 1
     ; jmp $
-    call menu
-jmp $
+    call final_screen
+jmp start
