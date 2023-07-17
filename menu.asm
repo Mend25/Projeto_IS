@@ -107,8 +107,8 @@ menu:
 	setText 6, 5, play, darkGreenColor
 	setText 6, 27, instruction, darkGreenColor
 	setText 20, 5, highest, darkGreenColor
-	setText 13, 5, credits, darkGreenColor
-	setText 13, 27, exit_message, darkGreenColor
+	setText 13, 4, credits, darkGreenColor
+	setText 13, 28, exit_message, darkGreenColor
 	
 	call first_cursor ; Inicia a aplicação
 	
@@ -179,13 +179,13 @@ box_app2:
 	ret
 	
 box_app3: 
-	drawSquare 20, 145, 100, 180
-	blackBackgroundApp 21, 146, 100, 180
+	drawSquare 200, 90, 280, 125
+	blackBackgroundApp 201, 91, 280, 125
 	ret
 	
 box_app4:
-	drawSquare 200, 145, 280, 180
-	blackBackgroundApp 201, 146, 280, 180
+	drawSquare 20, 90, 100, 125
+	blackBackgroundApp 21, 91, 100, 125
 	ret
 
 first_cursor:
@@ -228,7 +228,7 @@ second_cursor:
 third_cursor:
 	call cursor_app1
 	call cursor_app4
-	drawCursor 85, 164, 177, 98
+	drawCursor 85, 109, 122, 98
 
     call getchar
     
@@ -245,7 +245,7 @@ third_cursor:
 fourth_cursor:
 	call cursor_app3
 	call cursor_app2
-	drawCursor 265, 164, 177, 278
+	drawCursor 265, 109, 122, 278
 
     call getchar
     
@@ -273,12 +273,12 @@ cursor_app2:
 	ret
 cursor_app3:
 	drawer blackColor
-	drawCursor 85, 164, 177, 98
+	drawCursor 85, 109, 122, 98
 	drawer darkGreenColor
 	ret
 cursor_app4:
 	drawer blackColor
-	drawCursor 265, 164, 177, 278
+	drawCursor 265, 109, 122, 278
 	drawer darkGreenColor
 	ret
     
