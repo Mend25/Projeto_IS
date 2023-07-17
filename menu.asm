@@ -324,7 +324,7 @@ instructions:
 credits1:
     xor ax, ax
     mov ah, 0 
-    mov al, 13h
+    mov al, 12h
     int 10h
 
     xor ax, ax
