@@ -35,7 +35,7 @@ reset:
     ; mov bl, 10  ;posição y da bola
     ; ;mov [counter], 0
     ; call game_loop
-    call clear_screen
+    jmp $
     ret
 
 load_first_bar:
@@ -256,21 +256,27 @@ update_ball:
         .continue:
             sub bp, 5
             cmp bh, 0
-            je .mov_y
+            je .mov_y_2
             sub bl, 5
-
             call .update_movement
+            jmp .finish
             
         ;call delay1s
-
-        jmp reset
+        .finish:
+            jmp reset
         ;jmp $
         ; mov ax, 1
         ; mov lost, ax
         ;ret
         .mov_y:
             add bl, 5
+            call .update_movement
             jmp .continue
+        
+        .mov_y_2:
+            add bl, 5
+            call .update_movement
+            jmp .finish
 
     .goup:
         mov bh, 1
