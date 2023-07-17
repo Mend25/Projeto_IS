@@ -107,6 +107,8 @@ menu:
 	setText 6, 5, play, darkGreenColor
 	setText 6, 27, instruction, darkGreenColor
 	setText 15, 2, highest, darkGreenColor
+	setText 13, 5, credits, darkGreenColor
+	setText 13, 27, exit_message, darkGreenColor
 	
 	call first_cursor ; Inicia a aplicação
 	
