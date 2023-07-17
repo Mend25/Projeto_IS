@@ -21,8 +21,9 @@ data:
     instruction db "RULES", 0
     highest db "HIGHEST SCORE :", 0
     score_name db "           SOCCER PONG | x", 0
-    exit db 0
-    exit_game db 0
+    exit db 0;flag de saida do sistema
+    exit_game db 0;flag de saida do jogo
+    msg_exit db "exit...", 0
     
 start:
     ;setup menu
