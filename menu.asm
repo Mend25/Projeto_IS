@@ -226,9 +226,14 @@ instructions:
     .waitButton:
         xor ax, ax
 
-        call getchar_m
+        call getchar
 
         cmp al, " "
         je menu
 
         jmp .waitButton
+
+putchar:
+	mov ah, 0x0e
+	int 10h
+	ret
