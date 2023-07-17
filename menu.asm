@@ -106,7 +106,7 @@ menu:
 	setText 1, 14, message1, darkGreenColor
 	setText 6, 5, play, darkGreenColor
 	setText 6, 27, instruction, darkGreenColor
-	setText 20, 2, highest, darkGreenColor
+	setText 20, 3, highest, darkGreenColor
 	setText 13, 4, credits, darkGreenColor
 	setText 13, 28, exit_message, darkGreenColor
 	
