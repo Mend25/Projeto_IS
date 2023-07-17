@@ -1,6 +1,6 @@
 # Bootloader
 
-Pong versão IS!
+Pong versão IS! Tente ganhar da Máquina
 
 ## About
 
