@@ -26,6 +26,17 @@ reset:
     call delay1s
     mov ax, 1
     mov [exit_game], ax
+
+    mov ax, [counter]
+    mov cx, [highest_score1]
+    cmp ax, cx
+    ja get_max
+
+    ret
+
+get_max:
+    mov ax, [counter]
+    mov [highest_score1], ax
     ret
 
 load_first_bar:
