@@ -357,7 +357,7 @@ putchar:
 
 exit_system:
 	mov ah, 0 
-    mov al, 12h
+    mov al, 13h
     int 10h
 	mov si, msg_exit
 	call print_loop
