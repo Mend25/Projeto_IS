@@ -321,6 +321,34 @@ instructions:
 
         jmp .waitButton
 
+credits:
+    xor ax, ax
+    mov ah, 0 
+    mov al, 13h
+    int 10h
+
+    xor ax, ax
+    xor si, si
+    mov si, message5
+    jmp .print
+
+    .print:
+        lodsb
+        cmp al, 0
+        je .waitButton
+        call putchar
+        jmp .print
+
+    .waitButton:
+        xor ax, ax
+
+        call getchar
+
+        cmp al, " "
+        je menu
+
+        jmp .waitButton
+
 putchar:
 	mov ah, 0x0e
 	int 10h
