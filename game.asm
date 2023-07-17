@@ -396,7 +396,7 @@ draw_border_game:
 	drawer whiteColor
 	mov cx, 0
 	.draw_seg:
-		mov dx, 20
+		mov dx, 15
 		int 10h
 		mov dx, 199
 		int 10h
@@ -405,7 +405,7 @@ draw_border_game:
 		je .end_column
 		jmp .draw_seg
 	.end_column:
-		mov dx, 0
+		mov dx, 15
 	.draw_columns:
 		mov cx, 0
 		int 10h
