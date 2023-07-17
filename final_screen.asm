@@ -59,5 +59,16 @@ final_score:
     mov ax, dx
     add ax, '0'
     call put_score
+    call highest_score
+        
+    ret
 
+highest_score:
+    mov ax, [counter]
+    cmp ax, [highest_score]
+    ja .change_highest
+
+    .change_highest:
+        mov [highest_score], ax
+      
     ret
