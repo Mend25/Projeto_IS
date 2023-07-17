@@ -154,13 +154,19 @@ draw_border:
 	ret
 
 draw_box_app:
-    drawer blue
+    drawer green
 	call box_app1
+	call box_app2
     ret
 
 box_app1: 
-    drawSquare 20, 145, 100, 180
-	blackBackgroundApp 21, 146, 100, 180
+    drawSquare 200, 90, 280, 125
+	blackBackgroundApp 201, 91, 280, 125
+	ret
+
+box_app2:
+	drawSquare 20, 90, 100, 125
+	blackBackgroundApp 21, 91, 100, 125
 	ret
 
 first_cursor:
