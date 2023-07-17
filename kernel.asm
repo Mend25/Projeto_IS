@@ -16,7 +16,7 @@ data:
     counter dw 0
     play db "PLAY", 0
     instruction db "RULES", 0
-    highest db "HIGHEST SCORE", 0
+    highest db "HIGHEST SCORE :", 0
     score_name db "           SOCCER PONG | x", 0
 
 start:
