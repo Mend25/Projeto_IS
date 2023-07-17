@@ -322,11 +322,12 @@ instructions:
         jmp .waitButton
 
 credits1:
+    
     xor ax, ax
     mov ah, 0 
     mov al, 13h
     int 10h
-
+	call draw_border
     xor ax, ax
     xor si, si
     mov si, message5
@@ -348,7 +349,7 @@ credits1:
         je menu
 
         jmp .waitButton
-
+	
 putchar:
 	mov ah, 0x0e
 	int 10h
