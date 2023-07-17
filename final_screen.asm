@@ -65,10 +65,10 @@ final_score:
 
 highest_score:
     mov ax, [counter]
-    cmp ax, [highest_score]
+    cmp ax, [highest_score1]
     ja .change_highest
 
     .change_highest:
-        mov [highest_score], ax
+        mov [highest_score1], ax
       
     ret
