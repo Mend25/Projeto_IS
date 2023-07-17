@@ -192,7 +192,7 @@ cursor_app1:
 	
 second_cursor:
 	call cursorApp
-	drawCursor 85, 109, 122, 98
+	drawCursor 265, 54, 67, 278
 
     call getchar
     
