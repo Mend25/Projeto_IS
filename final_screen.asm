@@ -18,12 +18,13 @@ final_screen:
 
     mov si, message4
     call print_loop
-
+    call draw_border
 
     xor ax, ax
     call wait_command
     
     xor ax, ax
+    
 
 print_loop:
     lodsb
