@@ -17,6 +17,7 @@ data:
     second_bar_posy dw 100
     prev_ball_pos_x dw 100
     counter dw 0
+    highest_score dw 0
     exit_message db "EXIT", 0
     credits db "CREDITS", 0
     play db "PLAY", 0
