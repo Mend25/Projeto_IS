@@ -160,6 +160,10 @@ draw_box_app:
 	call box_app1
 	drawer darkGreenColor
 	call box_app2
+	drawer darkGreenColor
+	call box_app3
+	drawer darkGreenColor
+	call box_app4
     ret
 
 box_app1: 
@@ -171,9 +175,20 @@ box_app2:
 	drawSquare 200, 35, 280, 70
 	blackBackgroundApp 201, 36, 280, 70
 	ret
+	
+box_app3: 
+	drawSquare 20, 145, 100, 180
+	blackBackgroundApp 21, 146, 100, 180
+	ret
+	
+box_app4:
+	drawSquare 200, 145, 280, 180
+	blackBackgroundApp 201, 146, 280, 180
+	ret
 
 first_cursor:
 	call cursor_app2
+	call cursor_app3
 	drawCursor 85, 54, 67, 98
 
     call getchar
@@ -182,11 +197,66 @@ first_cursor:
     je .done
     cmp al, 'd'
     je second_cursor
+    cmp al, 's'
+    je third_cursor
     
     jmp first_cursor   
     
     .done:
         ret
+
+second_cursor:
+	call cursor_app1
+	call cursor_app4
+	drawCursor 265, 54, 67, 278
+
+    call getchar
+    
+    cmp al, 13
+    je instructions
+    cmp al, 'a'
+    je first_cursor
+    cmp al, 's'
+    je fourth_cursor
+ 
+    jmp second_cursor
+
+    ret
+    
+third_cursor:
+	call cursor_app1
+	call cursor_app4
+	drawCursor 85, 164, 177, 98
+
+    call getchar
+    
+    cmp al, 13
+    je instructions
+    cmp al, 'w'
+    je first_cursor
+    cmp al, 'd'
+    je fourth_cursor
+ 
+    jmp third_cursor
+
+    ret
+fourth_cursor:
+	call cursor_app3
+	call cursor_app2
+	drawCursor 265, 164, 177, 278
+
+    call getchar
+    
+    cmp al, 13
+    je instructions
+    cmp al, 'w'
+    je second_cursor
+    cmp al, 'a'
+    je third_cursor
+ 
+    jmp fourth_cursor
+
+    ret
     
 cursor_app1: 
 	drawer blackColor
@@ -199,21 +269,16 @@ cursor_app2:
 	drawCursor 265, 54, 67, 278
 	drawer darkGreenColor
 	ret
-	
-second_cursor:
-	call cursor_app1
-	drawCursor 265, 54, 67, 278
-
-    call getchar
-    
-    cmp al, 13
-    je instructions
-    cmp al, 'a'
-    je first_cursor
- 
-    jmp second_cursor
-
-    ret
+cursor_app3:
+	drawer blackColor
+	drawCursor 85, 164, 177, 98
+	drawer darkGreenColor
+	ret
+cursor_app4:
+	drawer blackColor
+	drawCursor 265, 164, 177, 278
+	drawer darkGreenColor
+	ret
     
 instructions:
     xor ax, ax
