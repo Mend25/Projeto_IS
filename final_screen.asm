@@ -37,7 +37,7 @@ print_loop:
         ret
 
 wait_command:
-    call getchar_m
+    call getchar
 
     cmp al, 0x0d
     je .done
