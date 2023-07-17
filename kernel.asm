@@ -12,7 +12,7 @@ data:
     message1 db "SOCCER PONG", 0
     message4 db 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, " Press F to pay respect", 0   
     message3 db 10, 13, "            YOU HAVE FAILED",10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "                 SCORE",10, 13, 10, 13, "                   ", 0
-    message5 db  "Devs:", 10, 13, 10, 13, " Felipe Ferreira da Silva Santos - ffss",10, 13, 10, 13, " Guilherme Montenegro de Albuquerque - gma4",10, 13, 10 ,13, " Victor Mendonça Aguiar - vma3", 10, 13, 10, 13, " Vitor Manoel de Melo Silva - vmms", 10, 13, 10, 13, 10, 13, 10, 13, " Press SPACE to return to menu", 0
+    message5 db  "Devs:", 10, 13, 10, 13, " Felipe Ferreira da Silva Santos - ffss",10, 13, 10, 13, " Guilherme Montenegro de Albuquerque - gma4",10, 13, 10 ,13, " Victor Mendonca Aguiar - vma3", 10, 13, 10, 13, " Vitor Manoel de Melo Silva - vmms", 10, 13, 10, 13, 10, 13, "We hope you enjoyed playing PONG SOCCER", 10, 13, 10, 13, 10, 13, 10, 13,  " Press SPACE to return to menu", 0
     message2 db "This is one of the hardest pong games inworld history!!!", 10, 13, 10, 13, 10, 13,"Try to survive the longest!!!", 10, 13, 10, 13, 10, 13, 10, 13, "How to play:", 10, 13, 10, 13, 10, 13, "    W -> up", 10, 13, 10, 13, "    S -> down", 10, 13, 10, 13, 10, 13, 10, 13, 10, 13, "Press SPACE to return to menu",0
     first_bar_posy dw 100
     second_bar_posy dw 100
