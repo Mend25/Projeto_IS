@@ -34,7 +34,7 @@ print_loop:
 wait_command:
     call getchar
 
-    cmp al, 0x0d
+    cmp al, 'f'
     je .done
 
     jmp wait_command
