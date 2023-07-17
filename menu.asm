@@ -97,8 +97,6 @@
 	mov al, blue ; Voltando a cor original
 %endmacro
 
-
-
 menu:
     call initVideo
 	call draw_border ; Escreve nome de cada APP
@@ -314,3 +312,11 @@ putchar:
 	mov ah, 0x0e
 	int 10h
 	ret
+
+exit_system:
+	mov ah, 0 
+    mov al, 12h
+    int 10h
+	mov si, msg_exit
+	call print_loop
+	jmp $
