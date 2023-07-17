@@ -35,3 +35,14 @@ print_loop:
 
     .done:
         ret
+
+wait_command:
+    call getchar_m
+
+    cmp al, 0x0d
+    je .done
+
+    jmp wait_command
+
+    .done:
+        ret
