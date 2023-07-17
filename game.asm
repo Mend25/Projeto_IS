@@ -249,7 +249,7 @@ update_ball:
         jmp .case_2
 
         .collision:
-            cmp al, 20
+            cmp al, 30
             jbe .change_sense ;ver se bateu na barra esquerda
 
         ;marca o ponto

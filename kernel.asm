@@ -47,6 +47,7 @@ start:
     xor ax, ax
     xor cx, cx
    	xor dx, dx
+    mov [counter], ax
     mov di, 1 ;flag de sentido x
     mov bp, 200;posição x da bola
     mov bh, 0  ;flag de sentido y
