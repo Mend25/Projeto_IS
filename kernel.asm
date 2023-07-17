@@ -18,7 +18,9 @@ data:
     instruction db "RULES", 0
     highest db "HIGHEST SCORE :", 0
     score_name db "           SOCCER PONG | x", 0
-
+    exit db 0
+    lost db 0
+    
 start:
     ;setup menu
     xor ax, ax
@@ -55,4 +57,8 @@ start:
     ;loop
     call game_loop
 
+    ; mov ax, exit
+    ; cmp ax, 1
+    ; jmp $
+    call menu
 jmp $

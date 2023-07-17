@@ -1,9 +1,14 @@
 game_loop:
+    xor al, al
     mov ah, 01h
     int 16h
     jz machine
     call update_first_bar
-    xor al, al
+    
+    ; mov ax, lost
+    ; cmp ax, 0
+    ; je game_loop
+
     jmp game_loop
 
 machine:
@@ -12,24 +17,26 @@ machine:
     jmp game_loop
 
 reset:
-    mov ax, [first_bar_posy]
-    mov ax, 100
-    mov [first_bar_posy], ax
-    mov ax, [second_bar_posy]
-    mov ax, 100
-    mov [second_bar_posy], ax
-    mov ax, [prev_ball_pos_x]
-    mov ax, 100
-    mov [prev_ball_pos_x], ax
-    xor ax, ax
-    xor cx, cx
-   	xor dx, dx
-    mov di, 1 ;flag de sentido x
-    mov bp, 200;posição x da bola
-    mov bh, 0  ;flag de sentido y
-    mov bl, 10  ;posição y da bola
-    ;mov [counter], 0
-    call game_loop
+    ; mov ax, [first_bar_posy]
+    ; mov ax, 100
+    ; mov [first_bar_posy], ax
+    ; mov ax, [second_bar_posy]
+    ; mov ax, 100
+    ; mov [second_bar_posy], ax
+    ; mov ax, [prev_ball_pos_x]
+    ; mov ax, 100
+    ; mov [prev_ball_pos_x], ax
+    ; xor ax, ax
+    ; xor cx, cx
+   	; xor dx, dx
+    ; mov di, 1 ;flag de sentido x
+    ; mov bp, 200;posição x da bola
+    ; mov bh, 0  ;flag de sentido y
+    ; mov bl, 10  ;posição y da bola
+    ; ;mov [counter], 0
+    ; call game_loop
+    call clear_screen
+    ret
 
 load_first_bar:
     mov si, flag
@@ -254,11 +261,13 @@ update_ball:
 
             call .update_movement
             
-        call delay1s
+        ;call delay1s
 
-        ;jmp reset
-        jmp $
-
+        jmp reset
+        ;jmp $
+        ; mov ax, 1
+        ; mov lost, ax
+        ;ret
         .mov_y:
             add bl, 5
             jmp .continue
