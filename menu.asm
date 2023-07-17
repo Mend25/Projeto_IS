@@ -172,7 +172,7 @@ box_app2:
 	ret
 
 first_cursor:
-	call cursorApp
+	call cursor_app2
 	drawCursor 85, 54, 67, 98
 
     call getchar
@@ -181,25 +181,26 @@ first_cursor:
     je .done
     cmp al, 'd'
     je second_cursor
-  
     
     jmp first_cursor   
     
     .done:
         ret
-
-cursorApp:
-	drawer blackColor
-	call cursor_app1
-	drawer darkGreenColor
-    ret
     
 cursor_app1: 
+	drawer blackColor
 	drawCursor 85, 54, 67, 98
+	drawer darkGreenColor
+	ret
+	
+cursor_app2: 
+	drawer blackColor
+	drawCursor 265, 54, 67, 278
+	drawer darkGreenColor
 	ret
 	
 second_cursor:
-	call cursorApp
+	call cursor_app1
 	drawCursor 265, 54, 67, 278
 
     call getchar
