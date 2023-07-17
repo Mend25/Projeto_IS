@@ -261,7 +261,7 @@ fourth_cursor:
     call getchar
     
     cmp al, 13
-    je instructions
+    je exit_system
     cmp al, 'w'
     je second_cursor
     cmp al, 'a'
