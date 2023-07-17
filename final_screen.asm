@@ -14,7 +14,7 @@ final_screen:
     mov si, message3
     call print_loop
     xor ax, ax
-    call final_score
+    call build_score
 
     mov si, message4
     call print_loop
