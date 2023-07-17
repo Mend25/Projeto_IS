@@ -244,7 +244,7 @@ third_cursor:
     call getchar
     
     cmp al, 13
-    je instructions
+    je credits1
     cmp al, 'w'
     je first_cursor
     cmp al, 'd'
@@ -321,7 +321,7 @@ instructions:
 
         jmp .waitButton
 
-credits:
+credits1:
     xor ax, ax
     mov ah, 0 
     mov al, 13h
