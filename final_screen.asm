@@ -14,7 +14,7 @@ final_screen:
     mov si, message3
     call print_loop
     xor ax, ax
-    call build_score
+    call final_score
 
     mov si, message4
     call print_loop
@@ -45,3 +45,19 @@ wait_command:
 
     .done:
         ret
+
+final_score:
+    mov ax, [counter]
+    mov dx, 0
+    mov cx, 10
+    div cx
+    add ax, '0'
+
+    call put_score
+    
+    sub ax, '0'
+    mov ax, dx
+    add ax, '0'
+    call put_score
+
+    ret
