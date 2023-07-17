@@ -1,20 +1,26 @@
 game_loop:
+    mov ax, 0
+    mov [exit_game], ax
     xor al, al
     mov ah, 01h
     int 16h
     jz machine
     call update_first_bar
     
-    ; mov ax, lost
-    ; cmp ax, 0
-    ; je game_loop
+    mov ax, [exit_game]
+    cmp ax, 0
+    je game_loop
 
-    jmp game_loop
+    ret
 
 machine:
     call update_second_bar
     call update_ball
-    jmp game_loop
+    mov ax, [exit_game]
+    cmp ax, 0
+    je game_loop
+
+    ret
 
 reset:
     ; mov ax, [first_bar_posy]
@@ -35,7 +41,8 @@ reset:
     ; mov bl, 10  ;posição y da bola
     ; ;mov [counter], 0
     ; call game_loop
-    jmp $
+    mov ax, 1
+    mov [exit_game], ax
     ret
 
 load_first_bar:

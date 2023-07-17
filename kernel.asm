@@ -21,7 +21,7 @@ data:
     highest db "HIGHEST SCORE :", 0
     score_name db "           SOCCER PONG | x", 0
     exit db 0
-    lost db 0
+    exit_game db 0
     
 start:
     ;setup menu
