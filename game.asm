@@ -41,6 +41,7 @@ reset:
     ; mov bl, 10  ;posição y da bola
     ; ;mov [counter], 0
     ; call game_loop
+    call delay1s
     mov ax, 1
     mov [exit_game], ax
     ret
