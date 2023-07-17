@@ -382,15 +382,39 @@ prints:
         ret 
 
 clear_screen:
-    ;call draw_border
     mov ah, 0
 	mov al, 13h
 	int 10h
-    
+    mov [tmp], bx
+    call draw_border_game
+    mov bx, [tmp]
     call build_score
     
     ret
 
+draw_border_game:
+	drawer whiteColor
+	mov cx, 0
+	.draw_seg:
+		mov dx, 20
+		int 10h
+		mov dx, 199
+		int 10h
+		inc cx
+		cmp cx, 319
+		je .end_column
+		jmp .draw_seg
+	.end_column:
+		mov dx, 0
+	.draw_columns:
+		mov cx, 0
+		int 10h
+		mov cx, 319
+		int 10h
+		inc dx
+		cmp dx, 199
+		jne .draw_columns
+	ret
 delay:
 	mov cx, 01h
     mov dx, 0A28h

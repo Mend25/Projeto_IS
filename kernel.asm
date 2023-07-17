@@ -24,6 +24,7 @@ data:
     exit db 0;flag de saida do sistema
     exit_game db 0;flag de saida do jogo
     msg_exit db "exit...", 0
+    tmp db 0
     
 start:
     ;setup menu
