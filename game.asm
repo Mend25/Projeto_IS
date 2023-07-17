@@ -385,7 +385,9 @@ clear_screen:
     mov ah, 0
 	mov al, 13h
 	int 10h
+    call draw_border
     call build_score
+    
     ret
 
 delay:
