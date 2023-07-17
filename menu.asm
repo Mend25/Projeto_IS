@@ -156,6 +156,7 @@ draw_border:
 draw_box_app:
     drawer darkGreenColor
 	call box_app1
+	drawer darkGreenColor
 	call box_app2
     ret
 
