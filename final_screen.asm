@@ -9,19 +9,16 @@ final_screen:
     mov bl, 2
     ;entra na tela final
 
+    xor si, si
+
     mov si, message3
     call print_loop
     xor ax, ax
     call build_score
 
     xor ax, ax
-    mov si, message4
-    call print_loop
-
-    xor ax, ax
     call wait_command
-
-
+    
     xor ax, ax
 
 print_loop:
