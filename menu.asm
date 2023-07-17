@@ -160,13 +160,13 @@ draw_box_app:
     ret
 
 box_app1: 
-    drawSquare 200, 90, 280, 125
-	blackBackgroundApp 201, 91, 280, 125
+    drawSquare 20, 35, 100, 70
+	blackBackgroundApp 21, 36, 100, 70
 	ret
 
 box_app2:
-	drawSquare 20, 90, 100, 125
-	blackBackgroundApp 21, 91, 100, 125
+	drawSquare 200, 35, 280, 70
+	blackBackgroundApp 201, 36, 280, 70
 	ret
 
 first_cursor:
