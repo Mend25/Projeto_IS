@@ -117,7 +117,18 @@ initVideo:
 	mov al, 13h
 	int 10h
     ret
-    
+
+printf_color:
+	loop_print_string:
+		lodsb
+		cmp al,0
+		je end_print_string
+		mov ah,0eh
+		int 10h
+		jmp loop_print_string
+	end_print_string:
+ret
+
 draw_border:
 	drawer whiteColor
 	mov cx, 0
