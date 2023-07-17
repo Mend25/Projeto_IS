@@ -71,5 +71,6 @@ highest_score:
 
     .change_highest:
         mov [highest_score1], ax
+        mov ax, [highest_score1]
       
     ret
