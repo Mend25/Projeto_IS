@@ -11,8 +11,6 @@ final_screen:
 
     mov si, message3
     call print_loop
-    ;volta pro menu
-    call menu
     xor ax, ax
     call build_score
 
