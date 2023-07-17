@@ -26,3 +26,12 @@ final_screen:
 
     xor ax, ax
 
+print_loop:
+    lodsb
+    cmp al, 0
+    je .done
+    call putchar
+    jmp print_loop
+
+    .done:
+        ret
